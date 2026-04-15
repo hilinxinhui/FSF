@@ -1,8 +1,8 @@
-# VSCode LaTeX configuration {ignore=True}
+# VSCode LaTeX configuration
 
 愉快地在VScode中编写TeX文档
 
-## Table of Contents {ignore=True}
+## Table of Contents
 
 <!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=2 orderedList=false} -->
 
@@ -11,9 +11,6 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Related Efforts](#related-efforts)
-- [Maintainer](#maintainer)
-- [Contributing](#contributing)
-- [LICENSE](#license)
 <!-- /code_chunk_output -->
 
 ## Background
@@ -195,22 +192,7 @@ tex -v
 
 ## Related Efforts
 
-- [latex-vscode-config](https://github.com/shinyypig/latex-vscode-config)
-- [使用VSCode编写LaTeX](https://zhuanlan.zhihu.com/p/38178015)
+- [Visual Studio Code (vscode)配置LaTeX](https://zhuanlan.zhihu.com/p/166523064)
+<!-- - [latex-vscode-config](https://github.com/shinyypig/latex-vscode-config)
+- [使用VSCode编写LaTeX](https://zhuanlan.zhihu.com/p/38178015) -->
 
-## Maintainer
-
-[@hilinxinhui](https://github.com/hilinxinhui)
-
-## Contributing
-
-欢迎Star、Fork，欢迎提交Issues和PRs！
-
-### Contributors
-
-<!-- readme: collaborators,contributors -start -->
-<!-- readme: collaborators,contributors -end -->
-
-## LICENSE
-
-[MIT](./LICENSE)

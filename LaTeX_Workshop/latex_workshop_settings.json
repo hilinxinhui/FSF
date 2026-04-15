@@ -1,139 +1,156 @@
 {
-    // ========================================
-    // latex-workshop其他配置
-    // ========================================
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "editor.wordWrap": "on",
+    "git.openRepositoryInParentFolders": "always",
 
-    // 鼠标悬停，预览公式时，支持 boldsymbol 宏
-    "latex-workshop.hover.preview.mathjax.extensions": [
-        "boldsymbol"
-    ],
-
-    // 是否启用 IntelliSense，自动补全引用的包中的环境和命令
+    //------------------------------LaTeX 配置----------------------------------
+    // 设置是否自动编译
+    "latex-workshop.latex.autoBuild.run":"never",
+    //右键菜单
+    "latex-workshop.showContextMenu":true,
+    //从使用的包中自动补全命令和环境
     "latex-workshop.intellisense.package.enabled": true,
-    
-    // 编译后的文件输出目录
-    "latex-workshop.latex.outDir": "./tmp",
-    
-    // 默认编译引擎为上次使用的
-    "latex-workshop.latex.recipe.default": "lastUsed",
-    
-    // 预览复杂公式，使用时需要通过 command palette (命令面板) 打开
-    "latex-workshop.mathpreviewpanel.cursor.enabled": true,
-    
-    // 不允许弹窗显示错误信息
+    //编译出错时设置是否弹出气泡设置
     "latex-workshop.message.error.show": false,
-    
-    // 不允许弹窗显示警告信息
     "latex-workshop.message.warning.show": false,
-    
-    // 预览 PDF 时，反转颜色
-    "latex-workshop.view.pdf.invert": 1,
-    
-    // 预览 PDF 时，自动检测是否需要反转颜色
-    "latex-workshop.view.pdf.invertMode.enabled": "auto",
-
-    // ========================================
-    // 编译工具链配置，使用latexmk（注释中是不使用latexmk的方法）
-    // 配置latex-workshop.latex.recipes和latex-workshop.latex.tools
-    // ========================================
-
-    "latex-workshop.latex.recipes": [
-        // 第一个recipe是默认的编译工具
+    // 编译工具和命令
+    "latex-workshop.latex.tools": [
         {
             "name": "xelatex",
-            "tools": [
-                "xelatexmk"
+            "command": "xelatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOCFILE%"
             ]
         },
         {
             "name": "pdflatex",
-            "tools": [
-                "pdflatexmk"
-            ]
-        },
-        // 不使用latexmk可以采用下面注释中的配置
-        // {
-        //     "name": "xelatex",
-        //     "tools": [
-        //         "xelatex"
-        //     ],
-        // },
-        // {
-        //     "name": "pdflatex",
-        //     "tools": [
-        //         "pdflatex"
-        //     ]
-        // },
-        // 不使用latexmk的情况下，需要单独使用bibtex编译，如下
-        // {
-        //     "name": "xe->bib->xe->xe",
-        //     "tools": [
-        //         "xelatex",
-        //         "bibtex",
-        //         "xelatex",
-        //         "xelatex"
-        //     ]
-        // },
-        // {
-        //     "name": "pdf->bib->pdf->pdf",
-        //     "tools": [
-        //         "pdflatex",
-        //         "bibtex",
-        //         "pdflatex",
-        //         "pdflatex"
-        //     ]
-        // }
-    ],
-
-    "latex-workshop.latex.tools": [
-        // 编译工具和命令
-        {
-            "name": "xelatexmk",
-            "command": "latexmk",
-            // 或"command": "xelatex",
-            "env": {},
+            "command": "pdflatex",
             "args": [
                 "-synctex=1",
-                "-pdfxe",
                 "-interaction=nonstopmode",
                 "-file-line-error",
-                "-outdir=%OUTDIR%",
-                "%DOC%"
+                "%DOCFILE%"
             ]
         },
         {
-            "name": "pdflatexmk",
+            "name": "latexmk",
             "command": "latexmk",
-            // 或"command": "pdflatex",
-            "env": {},
             "args": [
                 "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
                 "-pdf",
-                "-interaction=nonstopmode",
-                "-file-line-error",
                 "-outdir=%OUTDIR%",
-                "%DOC%"
+                "%DOCFILE%"
             ]
         },
-        // {
-        //     // 同理，不使用latexmk时需要单独使用bibtex
-        //     "name": "bibtex",
-        //     "command": "bibtex",
-        //     "args": [
-        //         "%DOC%"
-        //     ]
-        // }
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+        }
     ],
+    // 用于配置编译链
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "XeLaTeX",
+            "tools": [
+                "xelatex"
+            ]
+        },
+        {
+            "name": "PDFLaTeX",
+            "tools": [
+                "pdflatex"
+            ]
+        },
+        {
+            "name": "BibTeX",
+            "tools": [
+                "bibtex"
+            ]
+        },
+        {
+            "name": "LaTeXmk",
+            "tools": [
+                "latexmk"
+            ]
+        },
+        {
+            "name": "xelatex -> bibtex -> xelatex*2",
+            "tools": [
+                "xelatex",
+                "bibtex",
+                "xelatex",
+                "xelatex"
+            ]
+        },
+        {
+            "name": "pdflatex -> bibtex -> pdflatex*2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+        }
+    ],
+    //文件清理。此属性必须是字符串数组
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.bbl",
+        "*.blg",
+        "*.idx",
+        "*.ind",
+        "*.lof",
+        "*.lot",
+        "*.out",
+        "*.toc",
+        "*.acn",
+        "*.acr",
+        "*.alg",
+        "*.glg",
+        "*.glo",
+        "*.gls",
+        "*.ist",
+        "*.fls",
+        "*.log",
+        "*.fdb_latexmk"
+    ],
+    //设置为onFaild 在构建失败后清除辅助文件
+    "latex-workshop.latex.autoClean.run": "onFailed",
+    // 使用上次的recipe编译组合
+    "latex-workshop.latex.recipe.default": "lastUsed",
+    // 用于反向同步的内部查看器的键绑定。ctrl/cmd +点击(默认)或双击
+    "latex-workshop.view.pdf.internal.synctex.keybinding": "double-click",
 
-    // ========================================
-    // 使用latexindent格式化LaTeX代码
-    // 将latexindent的输出信息保存为log（保存到输出目录下）便于管理
-    // ========================================
-    
-    "latex-workshop.latexindent.args": [
-        "-g",
-        "./%OUTDIR%/indent.log",
-        "%TMPFILE%",
-        "-y=defaultIndent: '%INDENT%'"
-    ],
+    // //使用 SumatraPDF 预览编译好的PDF文件
+    // // 设置VScode内部查看生成的pdf文件
+    // "latex-workshop.view.pdf.viewer": "external",
+    // // PDF查看器用于在\ref上的[View on PDF]链接
+    // "latex-workshop.view.pdf.ref.viewer":"auto",
+    // // 使用外部查看器时要执行的命令。此功能不受官方支持。
+    // "latex-workshop.view.pdf.external.viewer.command": "F:/SumatraPDF/SumatraPDF.exe", // 注意修改路径
+    // // 使用外部查看器时，latex-workshop.view.pdf.external.view .command的参数。此功能不受官方支持。%PDF%是用于生成PDF文件的绝对路径的占位符。
+    // "latex-workshop.view.pdf.external.viewer.args": [
+    //     "%PDF%"
+    // ],
+
+    // // 将synctex转发到外部查看器时要执行的命令。此功能不受官方支持。
+    // "latex-workshop.view.pdf.external.synctex.command": "F:/SumatraPDF/SumatraPDF.exe", // 注意修改路径
+    // // latex-workshop.view.pdf.external.synctex的参数。当同步到外部查看器时。%LINE%是行号，%PDF%是生成PDF文件的绝对路径的占位符，%TEX%是触发syncTeX的扩展名为.tex的LaTeX文件路径。
+    // "latex-workshop.view.pdf.external.synctex.args": [
+    //     "-forward-search",
+    //     "%TEX%",
+    //     "%LINE%",
+    //     "-reuse-instance",
+    //     "-inverse-search",
+    //     "\"F:/Microsoft VS Code/Code.exe\" \"F:/Microsoft VS Code/resources/app/out/cli.js\" -r -g \"%f:%l\"", // 注意修改路径
+    //     "%PDF%"
+    // ],
 }
